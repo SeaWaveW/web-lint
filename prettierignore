@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+.pnpm-store
+pnpm-lock.yaml
+
+# Build / cache
+dist
+dist-ssr
+es
+lib
+.cache
+.vite
+coverage
+*.tsbuildinfo
+stats.html
+stats-*.html
+
+# Generated types (unplugin-auto-import / unplugin-vue-components)
+**/.types/auto-imports.d.ts
+**/.types/auto-components.d.ts
+**/.types/sqt-ui-svg-names.d.ts
+
+# Editor JSONC
+**/.vscode/settings.json
+**/.cursor/settings.json
+
+# Binary / minified
+*.xlsx
+*.min.js
+*.min.css
+
+# Logs / OS
+logs
+*.log
+.DS_Store
+Thumbs.db

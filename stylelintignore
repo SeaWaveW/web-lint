@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build / cache
+dist
+dist-ssr
+es
+lib
+.cache
+.vite
+coverage
+
+# Minified
+*.min.css
+*.min.js
+
+# Binary
+*.xlsx

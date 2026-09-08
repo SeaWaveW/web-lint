@@ -1,0 +1,21 @@
+/** ESLint / Stylelint 共用忽略。Prettier 读根目录 prettierignore，增删时两边一起改。 */
+export const ignoreGlobs = [
+	'**/node_modules/**',
+	'**/.pnpm-store/**',
+	'**/dist/**',
+	'**/dist-ssr/**',
+	'**/es/**',
+	'**/lib/**',
+	'**/.cache/**',
+	'**/.vite/**',
+	'**/coverage/**',
+	'**/.types/auto-imports.d.ts',
+	'**/.types/auto-components.d.ts',
+	'**/.types/sqt-ui-svg-names.d.ts',
+	'**/pnpm-lock.yaml',
+	'**/*.min.js',
+	'**/*.min.css',
+	'**/stats.html',
+	'**/stats-*.html',
+	'**/*.xlsx',
+]

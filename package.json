@@ -1,0 +1,108 @@
+{
+	"name": "@saco/web-lint",
+	"version": "1.0.0",
+	"description": "Shareable ESLint / Prettier / Stylelint / Commitlint config for Vue + TypeScript",
+	"type": "module",
+	"main": "./index.mjs",
+	"types": "./index.d.ts",
+	"bin": {
+		"web-lint": "./bin/cli.mjs"
+	},
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.mjs"
+		},
+		"./eslint": "./eslint.config.mjs",
+		"./prettier": "./prettier.config.mjs",
+		"./stylelint": "./stylelint.config.mjs",
+		"./commitlint": "./commitlint.config.mjs",
+		"./prettier-plugin-vue-as-parens": "./plugins/prettier-vue-as-parens.mjs",
+		"./prettierignore": "./prettierignore",
+		"./stylelintignore": "./stylelintignore",
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"bin",
+		"plugins",
+		"eslint.config.mjs",
+		"prettier.config.mjs",
+		"stylelint.config.mjs",
+		"commitlint.config.mjs",
+		"ignores.mjs",
+		"index.mjs",
+		"index.d.ts",
+		"prettierignore",
+		"stylelintignore",
+		"README.md"
+	],
+	"scripts": {
+		"test": "node scripts/check.mjs",
+		"lint": "node bin/cli.mjs eslint .",
+		"format": "node bin/cli.mjs prettier --write .",
+		"stylelint": "node bin/cli.mjs stylelint --allow-empty-input"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SeaWaveW/web-lint.git"
+	},
+	"keywords": [
+		"eslint",
+		"prettier",
+		"stylelint",
+		"commitlint",
+		"vue",
+		"typescript",
+		"shareable-config"
+	],
+	"author": "",
+	"license": "ISC",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"bugs": {
+		"url": "https://github.com/SeaWaveW/web-lint/issues"
+	},
+	"homepage": "https://github.com/SeaWaveW/web-lint#readme",
+	"engines": {
+		"node": ">=20"
+	},
+	"peerDependencies": {
+		"@commitlint/cli": ">=19",
+		"eslint": ">=9",
+		"prettier": ">=3",
+		"stylelint": ">=16",
+		"typescript": ">=5 <7"
+	},
+	"peerDependenciesMeta": {
+		"@commitlint/cli": {
+			"optional": true
+		},
+		"stylelint": {
+			"optional": true
+		},
+		"typescript": {
+			"optional": true
+		}
+	},
+	"dependencies": {
+		"@commitlint/cli": "^21.2.2",
+		"@commitlint/config-conventional": "^21.2.2",
+		"@eslint/js": "^10.0.1",
+		"@vue/eslint-config-prettier": "^10.2.0",
+		"eslint": "^10.10.0",
+		"eslint-plugin-vue": "^10.11.0",
+		"globals": "^17.12.0",
+		"postcss-html": "^2.0.0",
+		"postcss-scss": "^4.0.9",
+		"prettier": "^3.9.6",
+		"stylelint": "^17.15.0",
+		"stylelint-config-recess-order": "^7.8.0",
+		"stylelint-config-recommended-vue": "^2.0.0",
+		"stylelint-config-standard-scss": "^17.0.0",
+		"typescript": "~6.0.3",
+		"typescript-eslint": "^8.69.0"
+	},
+	"prettier": "./prettier.config.mjs"
+}
