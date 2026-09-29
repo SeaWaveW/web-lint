@@ -9,6 +9,10 @@ const rules = {
 	'no-empty-source': null,
 	'import-notation': null,
 	'comment-empty-line-before': null,
+	// Prettier 折行时运算符留在行尾、操作数换到下一行（calc 里的 * / + - 都会这样）。
+	// recommended-scss 默认开着这两条，保存后会被判错，整段样式爆红。
+	'scss/operator-no-newline-after': null,
+	'scss/operator-no-newline-before': null,
 	'selector-pseudo-class-no-unknown': [
 		true,
 		{ ignorePseudoClasses: ['deep', 'global', 'slotted'] },
