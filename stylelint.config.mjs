@@ -1,4 +1,15 @@
+import { createRequire } from 'node:module'
 import { ignoreGlobs } from './ignores.mjs'
+
+const require = createRequire(import.meta.url)
+
+/**
+ * stylelint 17 只解析 `./`、`../` 和绝对路径。
+ * `postcss-html` 这种包名会从 stylelint 自己的目录 import，pnpm 不提升，
+ * 编辑器报 Cannot resolve custom syntax module "postcss-html"。
+ * 从本文件解析成绝对路径，本地 link 和发包后都能找到。
+ */
+const postcssHtml = require.resolve('postcss-html')
 
 const rules = {
 	'selector-class-pattern': null,
@@ -37,6 +48,18 @@ export function defineStylelint(options = {}) {
 			...rules,
 			...options.rules,
 		},
+		// 必须写在 overrides 里：recommended-vue 对 *.vue 再 extends 一份 scss 规则，
+		// 根上的 customSyntax / operator 关停会被那一层盖掉。
+		overrides: [
+			{
+				files: ['*.vue', '**/*.vue'],
+				customSyntax: postcssHtml,
+				rules: {
+					'scss/operator-no-newline-after': null,
+					'scss/operator-no-newline-before': null,
+				},
+			},
+		],
 	}
 }
 

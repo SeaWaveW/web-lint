@@ -112,9 +112,10 @@ export default defineStylelint({
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `@saco/web-lint`                               | `eslint` / `prettier` / `stylelint` / `commitlint`、`defineEslint` / `defineStylelint`、ignore 路径 |
 | `@saco/web-lint/eslint`                        | ESLint flat config（默认导出）                                                                      |
-| `@saco/web-lint/prettier`                      | Prettier 配置（已带 Vue `as` 括号插件）                                                             |
+| `@saco/web-lint/prettier`                      | Prettier 配置（Vue `as` 括号、`calc` 按加减换行）                                                   |
 | `@saco/web-lint/stylelint`                     | Stylelint 配置                                                                                      |
 | `@saco/web-lint/commitlint`                    | Commitlint 配置                                                                                     |
 | `@saco/web-lint/prettier-plugin-vue-as-parens` | 单独引用该 Prettier 插件                                                                            |
+| `@saco/web-lint/prettier-plugin-css-calc`      | `calc` 放不下时从 `+` / `-` 换行，乘除留在同一项                                                    |
 
 默认约定与原先业务项目一致：无分号、单引号、Tab 缩进、对象形状用 `interface`、Vue 模板组件名 PascalCase。

@@ -1,3 +1,4 @@
+import * as cssCalc from './plugins/prettier-css-calc.mjs'
 import * as vueAsParens from './plugins/prettier-vue-as-parens.mjs'
 
 /** @type {import('prettier').Config} */
@@ -8,7 +9,7 @@ const config = {
 	tabWidth: 4,
 	htmlWhitespaceSensitivity: 'ignore',
 	endOfLine: 'auto',
-	plugins: [vueAsParens],
+	plugins: [vueAsParens, cssCalc],
 }
 
 export default config
