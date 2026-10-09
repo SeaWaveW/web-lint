@@ -81,4 +81,70 @@ if (!unaryMul.includes('calc(var(--pad) * -0.5)')) {
 	throw new Error(`unary minus after * should stay attached:\n${unaryMul}`)
 }
 
+/** `#` 和 `{` 必须贴在一起，否则不再是 Sass 插值 */
+const interpolation = await format(
+	'.a {\n\tmin-height: calc(#{$y-gap} * 2 + var(--tab-item-height));\n\theight: calc(var(--control-height) + #{$gap-size});\n\t$result: calc(#{$result} + #{$adj});\n\twidth: calc(var(--#{$token}) + #{$gap-size});\n}\n',
+	{ ...prettier, parser: 'scss' },
+)
+const interpolationExpected = [
+	'calc(#{$y-gap} * 2 + var(--tab-item-height))',
+	'calc(var(--control-height) + #{$gap-size})',
+	'calc(#{$result} + #{$adj})',
+	'calc(var(--#{$token}) + #{$gap-size})',
+]
+for (const piece of interpolationExpected) {
+	if (!interpolation.includes(piece)) {
+		throw new Error(`scss interpolation must stay #{ :\n${interpolation}`)
+	}
+}
+
+/** 放得下的 min 仍保持一行 */
+const shortMin = await format(
+	'.a {\n\twidth: calc(min(1px, 2px) + 3px);\n}\n',
+	{ ...prettier, parser: 'scss' },
+)
+if (!shortMin.includes('width: calc(min(1px, 2px) + 3px);')) {
+	throw new Error(`short min calc should stay one line:\n${shortMin}`)
+}
+
+/** calc 折行后，min 的参数和括号里的减号各自一行 */
+const nestedMin = await format(
+	'.a {\n\twidth: calc(#{$tab-height} * min(var(--agent-rows), var(--agent-max-rows)) + #{$tab-gap} * (min(var(--agent-rows), var(--agent-max-rows)) - 1));\n}\n',
+	{ ...prettier, parser: 'scss' },
+)
+const expectedNested = `.a {
+	width: calc(
+		#{$tab-height} * min(
+			var(--agent-rows),
+			var(--agent-max-rows)
+		)
+		+ #{$tab-gap} * (
+			min(
+				var(--agent-rows),
+				var(--agent-max-rows)
+			)
+			- 1
+		)
+	);
+}
+`
+if (nestedMin !== expectedNested) {
+	throw new Error(`nested min calc mismatch:\n${nestedMin}`)
+}
+
+/** 已经被拆开的 `# { $var }` 再格式化要粘回去 */
+const brokenInterpolation = await format(
+	'.a {\n\tmin-height: calc(# { $y-gap } * 2 + var(--tab-item-height));\n}\n',
+	{ ...prettier, parser: 'scss' },
+)
+if (
+	!brokenInterpolation.includes(
+		'calc(#{$y-gap} * 2 + var(--tab-item-height))',
+	)
+) {
+	throw new Error(
+		`spaced interpolation should glue back:\n${brokenInterpolation}`,
+	)
+}
+
 console.log('web-lint configs ok')

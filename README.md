@@ -116,6 +116,16 @@ export default defineStylelint({
 | `@saco/web-lint/stylelint`                     | Stylelint 配置                                                                                      |
 | `@saco/web-lint/commitlint`                    | Commitlint 配置                                                                                     |
 | `@saco/web-lint/prettier-plugin-vue-as-parens` | 单独引用该 Prettier 插件                                                                            |
-| `@saco/web-lint/prettier-plugin-css-calc`      | `calc` 放不下时从 `+` / `-` 换行，乘除留在同一项                                                    |
+| `@saco/web-lint/prettier-plugin-css-calc`      | `calc` 放不下时从 `+` / `-` 换行，乘除留在同一项。见下方 1.0.4 更新说明                             |
 
 默认约定与原先业务项目一致：无分号、单引号、Tab 缩进、对象形状用 `interface`、Vue 模板组件名 PascalCase。
+
+## css-calc 更新说明
+
+### 1.0.4
+
+- `#{$var}` 不再印成 `# { $var }`，保存后仍是 Sass 插值。
+- `calc` 因行宽折行时，里面的 `min` / `max` / `clamp` 每个参数单独一行，括号里的 `+` / `-` 也各占一行。
+- 一行放得下的短式保持一行，例如 `calc(var(--font-size) - 2px)`、`calc(min(1px, 2px) + 3px)`。
+
+业务项目用 `package.json` 的 `"prettier": "@saco/web-lint/prettier"` 即可，这个配置已经带上该插件。不要再在项目里写 `.prettierrc.*` 用查询串重新引用插件。
