@@ -28,6 +28,24 @@ const rules = {
 		true,
 		{ ignorePseudoClasses: ['deep', 'global', 'slotted'] },
 	],
+	// Tailwind 的指令不是标准 CSS。不放行的话 @source、@theme 会报未知规则。
+	'scss/at-rule-no-unknown': [
+		true,
+		{
+			ignoreAtRules: [
+				'theme',
+				'source',
+				'utility',
+				'variant',
+				'custom-variant',
+				'plugin',
+				'config',
+				'reference',
+				'apply',
+				'tailwind',
+			],
+		},
+	],
 }
 
 /**
@@ -57,6 +75,8 @@ export function defineStylelint(options = {}) {
 				rules: {
 					'scss/operator-no-newline-after': null,
 					'scss/operator-no-newline-before': null,
+					// recommended-vue 对 vue 再 extends 一份 scss 规则，根上的放行会被盖掉。
+					'scss/at-rule-no-unknown': rules['scss/at-rule-no-unknown'],
 				},
 			},
 		],

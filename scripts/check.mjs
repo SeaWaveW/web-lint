@@ -27,6 +27,12 @@ if (!stylelint.extends?.length || !defineStylelint().rules) {
 	throw new Error('stylelint config invalid')
 }
 
+const atRule = defineStylelint().rules?.['scss/at-rule-no-unknown']
+const ignored = Array.isArray(atRule) ? atRule[1]?.ignoreAtRules : []
+if (!ignored?.includes('source') || !ignored.includes('theme')) {
+	throw new Error('stylelint must allow Tailwind at-rules')
+}
+
 /** 裸包名 postcss-html 从 stylelint 目录 import 会失败，vue 覆盖必须是绝对路径 */
 const vueOverride = defineStylelint().overrides?.find(
 	(item) => item.customSyntax,

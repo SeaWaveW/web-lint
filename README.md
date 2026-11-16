@@ -120,7 +120,11 @@ export default defineStylelint({
 
 默认约定与原先业务项目一致：无分号、单引号、Tab 缩进、对象形状用 `interface`、Vue 模板组件名 PascalCase。
 
-## css-calc 更新说明
+## 更新说明
+
+### 1.0.5
+
+- Stylelint 放行 Tailwind 指令：`@theme`、`@source`、`@utility`、`@variant`、`@custom-variant`、`@plugin`、`@config`、`@reference`、`@apply`、`@tailwind`。Vue 单文件里同样放行。
 
 ### 1.0.4
 
